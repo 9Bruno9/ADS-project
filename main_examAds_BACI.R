@@ -8,7 +8,7 @@ grafici=F  # if true print all graphics
 
 #BACI 1999-------------------------------------------------------
 
-baci<- read.csv("BACI_HS92_Y1999_V202401b.csv") # load raw data
+baci<- read.csv("dataset/BACI_HS92_Y1999_V202401b.csv") # load raw data
 
 baci_example <- baci[c(1:100,5994474:5994574),]
 
@@ -21,7 +21,7 @@ baci99 <- baci %>%
   group_by(fromCode, toCode, year) %>%
   summarise(value = sum(value, na.rm = TRUE), .groups = "drop")
 
-baci_c<- read.csv("BACI_CCODES.csv")
+baci_c<- read.csv("dataset/BACI_CCODES.csv")
 names(baci_c)<- c("fromCode","fromName", "iso2", "from")
 
 baci99clean <- baci99 %>%
@@ -78,10 +78,10 @@ length(unique(top_exports99$toName))
 
 nodi_99 <- data.frame(cbind(name = unique(baci99clean$to))) 
 
-long <- read.csv("country-coord.csv")
+long <- read.csv("dataset/country-coord.csv")
 names(long)[c(3,5,6)]<- c("name", "latitude","longitude")
 
-conti<- read.csv("continents.csv")
+conti<- read.csv("dataset/continents.csv")
 names(conti)[c(1,5)]<- c("cont","name")
 
 conti <- conti %>% distinct(name, .keep_all = T)
@@ -135,7 +135,7 @@ if(grafici==TRUE){
 ##BACI 2004 --------------------------------------
 
 
-baci<- read.csv("BACI_HS92_Y2004_V202401b.csv")
+baci<- read.csv("dataset/BACI_HS92_Y2004_V202401b.csv")
 
 names(baci)<- c("year","fromCode","toCode","product","value","quantity")
 
@@ -147,7 +147,7 @@ baci04 <- baci %>%
   summarise(value = sum(value, na.rm = TRUE), .groups = "drop")
 
 
-baci_c<- read.csv("BACI_CCODES.csv")
+baci_c<- read.csv("dataset/BACI_CCODES.csv")
 names(baci_c)<- c("fromCode","fromName", "iso2", "from")
 
 baci04clean <- baci04 %>%
@@ -204,10 +204,10 @@ length(unique(top_exports04$toName))
 
 nodi_04 <- data.frame(cbind(name = unique(baci04clean$to))) 
 
-long <- read.csv("country-coord.csv")
+long <- read.csv("dataset/country-coord.csv")
 names(long)[c(3,5,6)]<- c("name", "latitude","longitude")
 
-conti<- read.csv("continents.csv")
+conti<- read.csv("dataset/continents.csv")
 names(conti)[c(1,5)]<- c("cont","name")
 
 conti <- conti %>% distinct(name, .keep_all = T)
@@ -231,7 +231,7 @@ E(g_04)$weight= baci04clean$value
 #BACI 2009-------------------------------------------------------
 
 
-baci<- read.csv("BACI_HS07_Y2009_V202401b.csv")
+baci<- read.csv("dataset/BACI_HS07_Y2009_V202401b.csv")
 
 names(baci)<- c("year","fromCode","toCode","product","value","quantity")
 
@@ -243,7 +243,7 @@ baci09 <- baci %>%
   summarise(value = sum(value, na.rm = TRUE), .groups = "drop")
 
 
-baci_c<- read.csv("BACI_CCODES.csv")
+baci_c<- read.csv("dataset/BACI_CCODES.csv")
 names(baci_c)<- c("fromCode","fromName", "iso2", "from")
 
 baci09clean <- baci09 %>%
@@ -300,10 +300,10 @@ length(unique(top_exports09$toName))
 
 nodi_09 <- data.frame(cbind(name = unique(baci09clean$to))) 
 
-long <- read.csv("country-coord.csv")
+long <- read.csv("dataset/country-coord.csv")
 names(long)[c(3,5,6)]<- c("name", "latitude","longitude")
 
-conti<- read.csv("continents.csv")
+conti<- read.csv("dataset/continents.csv")
 names(conti)[c(1,5)]<- c("cont","name")
 
 conti <- conti %>% distinct(name, .keep_all = T)
@@ -327,7 +327,7 @@ E(g_09)$weight= baci09clean$value
 ##BACI 2014 --------------------------------------
 
 
-baci<- read.csv("BACI_HS92_Y2014_V202401b.csv")
+baci<- read.csv("dataset/BACI_HS92_Y2014_V202401b.csv")
 
 names(baci)<- c("year","fromCode","toCode","product","value","quantity")
 
@@ -339,7 +339,7 @@ baci14 <- baci %>%
   summarise(value = sum(value, na.rm = TRUE), .groups = "drop")
 
 
-baci_c<- read.csv("BACI_CCODES.csv")
+baci_c<- read.csv("dataset/BACI_CCODES.csv")
 names(baci_c)<- c("fromCode","fromName", "iso2", "from")
 
 baci14clean <- baci14 %>%
@@ -396,10 +396,10 @@ length(unique(top_exports14$toName))
 
 nodi_14 <- data.frame(cbind(name = unique(baci14clean$to))) 
 
-long <- read.csv("country-coord.csv")
+long <- read.csv("dataset/country-coord.csv")
 names(long)[c(3,5,6)]<- c("name", "latitude","longitude")
 
-conti<- read.csv("continents.csv")
+conti<- read.csv("dataset/continents.csv")
 names(conti)[c(1,5)]<- c("cont","name")
 
 conti <- conti %>% distinct(name, .keep_all = T)
@@ -421,7 +421,7 @@ E(g_14)$weight= baci14clean$value
 
 ### BACI 2019 ----------------------------------------
 
-baci<- read.csv("BACI_HS17_Y2019_V202401b.csv")
+baci<- read.csv("dataset/BACI_HS17_Y2019_V202401b.csv")
 
 names(baci)<- c("year","fromCode","toCode","product","value","quantity")
 
@@ -434,7 +434,7 @@ baci19 <- baci %>%
   summarise(value = sum(value, na.rm = TRUE), .groups = "drop")
 
 
-baci_c<- read.csv("BACI_CCODES.csv")
+baci_c<- read.csv("dataset/BACI_CCODES.csv")
 names(baci_c)<- c("fromCode","fromName", "iso2", "from")
 
 baci19clean <- baci19 %>%
@@ -509,7 +509,7 @@ E(g_19)$weight= baci19clean$value
 
 # BACI 2023 ----------------------------------
 
-baci<- read.csv("BACI_HS22_Y2023_V202501.csv")
+baci<- read.csv("dataset/BACI_HS22_Y2023_V202501.csv")
 
 names(baci)<- c("year","fromCode","toCode","product","value","quantity")
 
@@ -520,7 +520,7 @@ baci23 <- baci %>%
   group_by(fromCode, toCode, year) %>%
   summarise(value = sum(value, na.rm = TRUE), .groups = "drop")
 
-baci_c<- read.csv("BACI_CCODES.csv")
+baci_c<- read.csv("dataset/BACI_CCODES.csv")
 names(baci_c)<- c("fromCode","fromName", "iso2", "from")
 
 baci23clean <- baci23 %>%
@@ -552,7 +552,6 @@ baci23clean <- baci23clean %>%
 cbind(unique(baci23clean$to), unique(baci23clean$toName))
 cbind(unique(baci23clean$from), unique(baci23clean$fromName))
 
-
 rm(baci)
 rm(baci_c)
 rm(baci23)
@@ -567,26 +566,21 @@ baci23clean <- baci23clean %>%
   group_by(from) %>%
   mutate(totalExp = sum(value), relValue = value/totalExp)
 
-
-
 top_exports23 <- baci23clean %>%
   group_by(from) %>%
   slice_max(value, n = 5)
-
 
 
 length(unique(top_exports23$fromName))
 length(unique(top_exports23$toName))
 
 
-
-
 nodi_23 <- data.frame(cbind(name = unique(baci23clean$to))) 
 
-long <- read.csv("country-coord.csv")
+long <- read.csv("dataset/country-coord.csv")
 names(long)[c(3,5,6)]<- c("name", "latitude","longitude")
 
-conti<- read.csv("continents.csv")
+conti<- read.csv("dataset/continents.csv")
 names(conti)[c(1,5)]<- c("cont","name")
 
 conti <- conti %>% distinct(name, .keep_all = T)
@@ -830,7 +824,6 @@ simulate_resilience <- function(graph, strategy, fraction_steps = seq(0, vcount(
   for (f in fraction_steps) {
     # Number of nodes to remove
     nodes_to_remove <- f
-    
     # Select nodes to remove based on strategy
     if (strategy == "random") {
       nodes <- sample(V(graph), nodes_to_remove)
@@ -871,7 +864,7 @@ for (strategy in strategies) {
   all_results <- rbind(all_results, results)
 }
 
-# Plot the results
+
 if(grafici==T){
 x11()
 ggplot(all_results, aes(x = fraction_removed/vcount(g_23), y = lcc_size/vcount(g_23), color = strategy)) +
@@ -897,64 +890,9 @@ ggplot(all_results, aes(x = fraction_removed/vcount(g_23), y = lcc_size/vcount(g
 save(list=ls(), file = "analisi3.Rdata")
 
 
-#load("analisi2.Rdata")
+#load("analisi3.Rdata")
 
 
 
 
 
-
-    
-library(lpSolve)
-library(lpSolveAPI)
-make_incidence = function(g) {
-  n = vcount(g)
-  m = ecount(g)
-  # get edges as a matrix
-  E = get.edges(g, E(g))
-  B = matrix(0, nrow = n, ncol = m)
-  # build incidence matrix
-  for (i in 1:m) {
-    B[E[i,1], i] = 1
-    B[E[i,2], i] = 1
-  }  
-  return(B)
-}
-regularify = function (g) {
-  n = vcount(g)
-  m = ecount(g)
-  B = make_incidence(g)
-  # objective function
-  obj = rep(0, m + 1)
-  # constraint matrix
-  con = cbind(B, rep(-1, n))
-  # direction of constraints
-  dir = rep("=", n)
-  # right hand side terms
-  rhs = -degree(g)
-  # solve the LP problem
-  sol = lp("max", obj, con, dir, rhs)
-  # get solution
-  if (sol$status == 0) {
-    s = sol$solution
-    # weights
-    w = s[1:m] + 1
-    # weighted degree
-    d = s[m+1]
-  }
-  # return the solution
-  if (sol$status == 0) {
-    return(list(weights = w, degree = d)) 
-  }
-  else {
-    return(NULL)   
-  }
-}
-
-regularify(g_23)
-
-
-
-#--------------------------------------------------------------------
-# Per la prossima volta:
-# PROVARE a fare il grafico della percolazione?
