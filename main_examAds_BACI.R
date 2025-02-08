@@ -200,8 +200,6 @@ length(unique(top_exports04$fromName))
 length(unique(top_exports04$toName))
 
 
-
-
 nodi_04 <- data.frame(cbind(name = unique(baci04clean$to))) 
 
 long <- read.csv("dataset/country-coord.csv")
@@ -294,8 +292,6 @@ top_exports09 <- baci09clean %>%
 
 length(unique(top_exports09$fromName))
 length(unique(top_exports09$toName))
-
-
 
 
 nodi_09 <- data.frame(cbind(name = unique(baci09clean$to))) 
@@ -814,7 +810,7 @@ power = function(A, t) {
 ### RESILIENCE --------------
 
 # Function to simulate node removal
-simulate_resilience <- function(graph, strategy, fraction_steps = seq(0, vcount(graph), by = 1)) {
+simulate_resilience <- function(graph, strategy, fraction_steps = seq(1, vcount(graph)-1, by = 1)) {
   results <- data.frame(fraction_removed = numeric(),
                         lcc_size = numeric(),
                         strategy = character())
@@ -837,17 +833,23 @@ simulate_resilience <- function(graph, strategy, fraction_steps = seq(0, vcount(
       nodes <- order(-degree(graph, mode="in"))[1:nodes_to_remove]
     }
     
+
+    
     
     # Remove nodes
     graph_removed <- delete_vertices(graph, nodes)
     
+    
+    
+    
     # Compute the size of the largest connected component
     components <- components(graph_removed)
     lcc_size <- max(components$csize, na.rm = TRUE)
-    
-    # Store results
+    conness<- is_connected(graph_removed)
+     #Store results
     results <- rbind(results, data.frame(fraction_removed =  f,
                                          lcc_size = lcc_size,
+                                         connesso = conness,
                                          strategy = strategy))
   }
   
@@ -863,6 +865,9 @@ for (strategy in strategies) {
   results <- simulate_resilience(g_23, strategy)
   all_results <- rbind(all_results, results)
 }
+
+
+
 
 
 if(grafici==T){

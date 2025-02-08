@@ -49,7 +49,7 @@ Grazie alla sua metodologia di armonizzazione e alla sua ampia copertura, BACI r
 
 ## DOMANDE DI RICERCA
 
-Con questo studio è di interesse approfondire ed provare a rispondere alle seguenti domande?
+Con questo studio è di interesse approfondire e provare a rispondere alle seguenti domande?
 
 - Centralità dei nodi: Quali sono i Paesi più importanti nel commercio globale? Sono variati negli anni? Per rispondere si analizzerà quali sono i paesi più centrali nella rete di esportazioni in base a misure come la centralità basata su strength, eigen-centrality,betweenness e PageRank.
 
@@ -190,7 +190,7 @@ head(nodi_99)
 
 ## ANALISI ESPLORATIVA
 
-La reti analizzate presentano un numero di nodi che va da 186 a 195 e un numero di archi che va da 20149 a 26510 come si può osservare nella tabella \@ref(tab:table-dim). Il numero di archi o la densità crescenti sono dei buoni indicatori dell'aumento della globalizzazione del nostro sistema economico: sempre più paesi sono connessi direttamente e commerciano tra loro. Le reti sono caratterizzate da un'elevata reciprocità superiore all'85%. Questo implica che se un paese i esporta ad un j, è vero quasi sempre anche il viceversa. Cioé anche j esporta a i. Tutte e sei le reti sono connesse.
+La reti analizzate presentano un numero di nodi che va da 186 a 195 e un numero di archi che va da 20149 a 26510 come si può osservare nella tabella \@ref(tab:table-dim). Il numero di archi o la densità crescenti sono dei buoni indicatori dell'aumento della globalizzazione del nostro sistema economico: sempre più paesi sono connessi direttamente e commerciano tra loro. Le reti sono caratterizzate da un'elevata reciprocità superiore all'85%. Questo implica che se un paese $i$ esporta ad uno $j$, è vero quasi sempre anche il viceversa. Quindi, molto probabilmente, anche $j$ esporta a $i$. Tutte e sei le reti sono connesse.
 
 ```{r table-dim}
 nedges<- c(dim(baci99clean)[1],dim(baci04clean)[1], dim(baci09clean)[1],dim(baci14clean)[1], dim(baci19clean)[1], dim(baci23clean)[1] )
@@ -267,14 +267,14 @@ set.seed(1)
 
 La figura \ref{fr-plot} è ottenuta allentando il vincolo geografico sulla posizione dei paesi nella rete commerciale e applicando un \textit{force-directed algorithm} sugli stessi dati. I colori, le etichette e le dimensioni del cerchio di ciascun nodo-paese sono gli stessi di prima.
 Semplificando, l'algoritmo agisce come un sistema di molle equilibrato
-che minimizza l'energia del sistema. In altre parole, è come se i paesi fossero collegati attraverso delle molle: i Paesi che sono collegati con un peso maggiore tendono a rimanere vicini, mentre quelli che non sono collegati tendono a essere distanti tra loro. Tuttavia, la posizione di ciascun Paese non dipende solo dai suoi legami bilaterali, ma anche dall'effetto indiretto degli altri: i partner commerciali dei suoi partner commerciali contribuiranno a determinare la posizione del paese nella rete. Il sociogramma permette di cogliere l'effetto multilaterale sui flussi bilaterali, attribuendo a ogni paese una posizione rispetto a tutti gli altri paesi della rete commerciale e dipendendo dall'intero sistema commerciale. Il vantaggio di rappresentare il commercio internazionale come una rete di flussi commerciali è quindi la possibilità di visualizzare l'effetto della relazione tra i Paesi commerciali e della struttura della rete stessa, rivelando schemi difficilmente visibili con altri approcci. [@de2014network]
-Attraverso questa disposizione è possibile individuare tre blocchi centrali principali: Stati Uniti, China, e blocco europeo guidato dalla Germania. I Paesi dell'Oceania sono più vicini al blocco asiatico, mentre quelli del Nord e Sud america a Stati Uniti. I Paesi africani sono sparsamente distribuiti ma la maggior parte sono vicini al blocco Cinese e a quello Europeo. 
+che minimizza l'energia del sistema. In altre parole, è come se i paesi fossero collegati attraverso delle molle: i Paesi che sono collegati con un peso maggiore tendono a rimanere vicini, mentre quelli che non sono collegati tendono a essere distanti tra loro. Tuttavia, la posizione di ciascun Paese non dipende solo dai suoi legami bilaterali, ma anche dall'effetto indiretto degli altri: i partner commerciali dei suoi partner commerciali contribuiranno a determinare la posizione del paese nella rete. Questo grafico permette di cogliere l'effetto multilaterale sui flussi bilaterali, attribuendo a ogni paese una posizione rispetto a tutti gli altri paesi della rete commerciale e dipendendo dall'intero sistema commerciale. Il vantaggio di rappresentare il commercio internazionale come una rete è quindi la possibilità di visualizzare l'effetto della relazione tra i paesi sulla struttura della rete stessa, rivelando schemi difficilmente visibili con altri approcci (@de2014network).
+Attraverso questa disposizione è possibile individuare tre blocchi centrali principali: Stati Uniti, China, e blocco europeo guidato dalla Germania. I paesi dell'Oceania sono più vicini al blocco asiatico, mentre quelli del Nord e Sud America a Stati Uniti. I paesi africani sono sparsamente distribuiti ma la maggior parte sono vicini al blocco cinese e a quello europeo. 
 
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=1.1\linewidth]{plot/rete_countries_fr.jpeg}
-    \caption{Rete degli stati tenuto conto delle 5 esportazioni più importanti per paese. Realizzata con algoritmo force-directed. La dimensione di ogni nodo è proporzionale alla sua log(strength). I colori corrispondono al continente/area geografica di appartenenza.}
+    \caption{Rete degli stati tenuto conto delle cinque esportazioni più importanti per paese. Realizzata con algoritmo force-directed. La dimensione di ogni nodo è proporzionale alla sua log(strength). I colori corrispondono al continente/area geografica di appartenenza.}
     \label{fr-plot}
 \end{figure}
 
@@ -652,7 +652,21 @@ knitr::include_graphics("plot/rete_com.jpeg")
 ```
 
 ## RESILIENZA 
-La resilienza della rete sembra essere piuttosto forte. Come si può osservare in figura \ref{res-plot}. Per ridurre la componenete connessa le strategie più efficaci risultano essere la rimozione dei nodi con maggior betweenness e in-degree. 
+La resilienza della rete sembra essere piuttosto forte. Come si può osservare in figura \ref{res-plot}. Per ridurre la componenete connessa le strategie più efficaci risultano essere la rimozione dei nodi con maggior betweenness e in-degree. Per rendere il grafo non connesso è necessario eliminare:
+- 90 nodi secondo la strategia betweenness;
+- 96 secondo la strategia in-degree;
+- 111 secondo la strategia strength;
+- 134 secondo la strategia PageRank;
+- 186 secondo la strategia random
+
+```{r}
+# quanti nodi è necessario rimuovere per rendere il grafo non più connesso
+  all_results %>%
+      group_by(strategy) %>%
+      filter(connesso=="FALSE") %>%
+      slice_min(fraction_removed, n = 1)
+    
+```
 
 ```{r, eval =FALSE}
 ggplot(all_results, aes(x = fraction_removed/vcount(g_23), y = lcc_size/vcount(g_23), color = strategy)) +
